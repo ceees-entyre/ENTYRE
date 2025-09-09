@@ -99,41 +99,6 @@
   margin-bottom: 0.5rem;
 }
 
-.collapsible_section {
-  margin-bottom: 1.5rem;
-}
-
-.collapsible_section_header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f8fafc;
-  padding: 16px 20px;
-  border-radius: 8px;
-  border-left: 4px solid #FFB500; /* UCC Crest Yellow accent */
-}
-
-.collapsible_section_header h2 {
-  font-family: 'Merriweather', Georgia, serif;
-  color: #003C69; /* UCC Crest Blue */
-  margin: 0;
-}
-
-.collapsible_section_header button {
-  background: #FFB500; /* UCC Crest Yellow */
-  color: #003C69; /* UCC Crest Blue */
-  border: none;
-  border-radius: 4px;
-  padding: 8px 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.collapsible_section_header button:hover {
-  background: #ED9A22; /* UCC Gold */
-}
-
 .pathway_selector {
   display: flex;
   gap: 12px;
@@ -226,7 +191,7 @@
   padding: 24px;
 }
 
-/* Banner Carousel with UCC styling */
+/* Banner Carousel */
 .bannerCarousel {
   width: 100%;
   max-width: 965px;
