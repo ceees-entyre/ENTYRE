@@ -1,15 +1,12 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import ReactFlow, { Background, Controls } from 'react-flow-renderer';
-import CustomPolylineEdge from '../components/CustomPolylineEdge';
-import {
-  pathwayInfoCard,
-  flowContainer
-} from '../components/Style';
+import CustomPolylineEdge from '../components/workflow/CustomPolylineEdge';
+import { pathwayInfoCard, flowContainer } from '../components/workflow/Style';
 
 import styles from '../styles/App.module.css';
-import BackgroundImageNode from '../components/BackgroundImageNode';
-import ConnectedIconNode from '../components/ConnectedIconNode';
-import StatusIndicator from '../components/StatusIndicator';
+import BackgroundImageNode from '../components/workflow/BackgroundImageNode';
+import ConnectedIconNode from '../components/workflow/ConnectedIconNode';
+import StatusIndicator from '../components/workflow/StatusIndicator';
 
 const defaultEdgeStyles = {
   default: { stroke: "#003C69", strokeWidth: 2 },

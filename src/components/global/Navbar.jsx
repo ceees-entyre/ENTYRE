@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import styles from '../styles/Nav.module.css';
+import styles from '../../styles/Nav.module.css';
 
 // Breadcrumb component
 const Breadcrumb = ({ location }) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import BannerCarousel from '../components/BannerCarousel'
+import BannerCarousel from '../components/homepage/BannerCarousel';
 
 // Dynamic Section Renderer
 const DynamicSection = ({ section }) => {
@@ -182,12 +182,15 @@ const DynamicSection = ({ section }) => {
     case 'features-grid':
       return (
         <section style={containerStyles}>
-          {section.title && <h2 style={titleStyles}>{section.title}</h2>}
-          {section.content && (
-            <div style={{ marginBottom: '40px', fontSize: '1.1rem', lineHeight: '1.6' }}>
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{section.content}</ReactMarkdown>
-            </div>
-          )}
+          {section.title && <h2 
+          style={{ 
+            ...titleStyles,
+            textAlign: 'center',
+            marginTop:'50px',
+            marginBottom:'50px',
+            }}>
+              {section.title}
+              </h2>}
           {section.features && section.features.length > 0 && (
             <div style={{
               display: 'grid',
@@ -204,7 +207,7 @@ const DynamicSection = ({ section }) => {
                     boxShadow: '0 4px 12px rgba(0, 60, 105, 0.08)',
                     border: '1px solid #e2e8f0',
                     textAlign: 'center',
-                    transition: 'transform 0.2s'
+                    transition: 'transform 0.2s',
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
                   onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
@@ -217,6 +220,7 @@ const DynamicSection = ({ section }) => {
                   <h3 style={{
                     fontSize: '1.4rem',
                     marginBottom: '16px',
+                    fontFamily: 'Merriweather, Georgia, serif',
                     color: '#003C69'
                   }}>
                     {feature.title}
@@ -257,105 +261,99 @@ const DynamicSection = ({ section }) => {
       return (
         <section
           style={{
-            ...containerStyles,
-            background: '#f8fafc',
-            border: '1px solid #f1f3f6',
-            borderRadius: '10px',
-            padding: '32px 32px 32px 32px',
-            display: 'flex',
-            alignItems: 'flex-start',
-            gap: '32px',
-            boxSizing: 'border-box',
-            position: 'relative',
-            maxWidth: '100%',
-            margin: '0 auto 48px auto'
+            background: 'rgb(248, 250, 252)',
+            padding: '40px',
+            borderRadius: '12px',
+            marginBottom: '48px',
+            border: '1px solid rgb(226, 232, 240)'
           }}
         >
-          <div style={{ flex: 1, minWidth: 0 }}>
-            {section.title && (
-              <h2
-                style={{
-                  ...titleStyles,
-                  color: '#003C69',
-                  fontSize: '1.5rem',
-                  marginBottom: '18px'
-                }}
-              >
-                {section.title}
-              </h2>
-            )}
-            {section.content && (
-              <div
-                style={{
-                  fontSize: '1rem',
-                  lineHeight: '1.7',
-                  color: '#444',
-                  marginBottom: 0
-                }}
-              >
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '32px',
+              alignItems: 'center'
+            }}
+          >
+            <div>
+              {section.title && (
+                <h2
+                  style={{
+                    fontFamily: 'Merriweather, Georgia, serif',
+                    color: 'rgb(0, 60, 105)',
+                    fontSize: '2rem',
+                    marginBottom: '20px'
+                  }}
+                >
+                  {section.title}
+                </h2>
+              )}
+              {section.content && (
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    p: ({node, ...props}) => (
+                      <p
+                        style={{
+                          fontSize: '1.1rem',
+                          lineHeight: '1.7',
+                          color: 'rgb(51, 51, 51)',
+                          marginBottom: '16px'
+                        }}
+                        {...props}
+                      />
+                    ),
+                    strong: ({node, ...props}) => (
+                      <strong style={{ fontWeight: 700 }} {...props} />
+                    )
+                  }}
+                >
                   {section.content}
                 </ReactMarkdown>
+              )}
+            </div>
+            {section.stats && section.stats.length > 0 && (
+              <div
+                style={{
+                  background: 'white',
+                  padding: '24px',
+                  borderRadius: '12px',
+                  boxShadow: 'rgba(0, 60, 105, 0.08) 0px 4px 12px'
+                }}
+              >
+                {section.stats.map((stat, idx) => (
+                  <div key={idx}>
+                    <h3
+                      style={{
+                        color: 'rgb(206, 31, 44)',
+                        fontSize: '2.5rem',
+                        fontWeight: 700,
+                        textAlign: 'center',
+                        marginBottom: '8px',
+                        fontFamily: 'Merriweather, Georgia, serif'
+                      }}
+                    >
+                      {stat.number}
+                    </h3>
+                    {stat.description && (
+                      <p
+                        style={{
+                          textAlign: 'center',
+                          color: 'rgb(102, 102, 102)',
+                          fontSize: '1.1rem',
+                          margin: '0px auto',
+                          maxWidth: '300px',
+                          display: 'block'
+                        }}
+                        dangerouslySetInnerHTML={{ __html: stat.description.replace(/\n/g, '<br />') }}
+                      />
+                    )}
+                  </div>
+                ))}
               </div>
             )}
           </div>
-          {section.stats && section.stats.length > 0 && (
-            <div
-              style={{
-                flex: '0 0 320px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              {section.stats.map((stat, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    background: '#fff',
-                    borderRadius: '10px',
-                    boxShadow: '0 2px 12px 0 rgba(0,0,0,0.04)',
-                    padding: '32px 36px',
-                    minWidth: '220px',
-                    textAlign: 'center',
-                    border: '1px solid #f1f3f6'
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: '2.4rem',
-                      fontWeight: 600,
-                      color: stat.color || '#CE1F2C',
-                      marginBottom: '8px',
-                      fontFamily: "'FiraGO', sans-serif"
-                    }}
-                  >
-                    {stat.number}
-                  </div>
-                  {/* <div
-                    style={{
-                      fontSize: '1rem',
-                      color: '#666',
-                      marginBottom: stat.description ? '8px' : 0
-                    }}
-                  >
-                    {stat.label}
-                  </div> */}
-                  {stat.description && (
-                    <div
-                      style={{
-                        color: '#888',
-                        fontSize: '1rem',
-                        marginTop: '4px'
-                      }}
-                    >
-                      {stat.description}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
         </section>
       );
 
@@ -701,9 +699,11 @@ export default function FlexibleHome() {
         <BannerCarousel />
       </div>
       <div style={{ maxWidth: '95%', margin: '0 auto', padding: '0 20px' }}>
-        {sections.map((section, idx) => (
+        {sections
+        .filter(section => section.isVisible !== false)
+        .map((section, idx) => (
           <DynamicSection key={section._id || idx} section={section} />
-        ))}
+      ))}
       </div>
     </>
   );

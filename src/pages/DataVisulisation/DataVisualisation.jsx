@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
-import RadarChart from './components/comparePathways';
-import McdaTool from './components/mcdaTool';
-import McdaUserManual from './components/mcdaUserManual';
+import RadarChart from './subpages/comparePathways';
+import McdaTool from './subpages/mcdaTool';
+import McdaUserManual from './subpages/mcdaUserManual';
 import styles from '../../styles/App.module.css';
 
 const tabs = [

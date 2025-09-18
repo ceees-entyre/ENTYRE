@@ -16,7 +16,6 @@ const Breadcrumb = ({ customItems = null }) => {
     'outputs': 'Publications'
   };
 
-  // Use custom items if provided, otherwise generate from current path
   let breadcrumbItems = [];
   
   if (customItems) {

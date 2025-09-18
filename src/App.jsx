@@ -2,13 +2,13 @@ import React from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import styles from './styles/App.module.css';
 
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Navbar from './components/global/Navbar';
+import Footer from './components/global/Footer';
 
 // Page views
 import Home from './pages/Home';
-import KeyOutputs from './pages/KeyOutputs';
-import ArticleDetail from './pages/OutputDetail';
+import KeyOutputs from './pages/Outputs/KeyOutputs';
+import ArticleDetail from './pages/Outputs/OutputDetail';
 import PathwayExplorer from './pages/PathwayExplorer';
 import DataVisualisation from './pages/DataVisulisation/DataVisualisation';
 
