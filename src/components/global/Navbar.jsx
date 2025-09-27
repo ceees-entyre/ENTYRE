@@ -3,9 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from '../../styles/Nav.module.css';
 
 // Breadcrumb component
-const Breadcrumb = ({ location }) => {
+const Breadcrumb = () => {
+  const location = useLocation();
   const pathnames = location.pathname.split('/').filter((x) => x);
-  
+
   const breadcrumbNames = {
     'home': 'Home',
     'key-outputs': 'Research & Publications',
@@ -34,11 +35,11 @@ const Breadcrumb = ({ location }) => {
         padding: '0 2rem',
         fontFamily: "'FiraGO', sans-serif"
       }}>
-        <Link 
-          to="/home" 
-          style={{ 
-            color: '#006087', 
-            textDecoration: 'none' 
+        <Link
+          to="/home"
+          style={{
+            color: '#006087',
+            textDecoration: 'none'
           }}
         >
           Home
@@ -49,18 +50,18 @@ const Breadcrumb = ({ location }) => {
           const displayName = breadcrumbNames[pathname] || pathname.charAt(0).toUpperCase() + pathname.slice(1);
 
           return (
-            <span key={pathname}>
+            <span key={routeTo}>
               <span style={{ margin: '0 8px', color: '#ccc' }}>/</span>
               {isLast ? (
                 <span style={{ color: '#003C69', fontWeight: '500' }}>
                   {displayName}
                 </span>
               ) : (
-                <Link 
-                  to={routeTo} 
-                  style={{ 
-                    color: '#006087', 
-                    textDecoration: 'none' 
+                <Link
+                  to={routeTo}
+                  style={{
+                    color: '#006087',
+                    textDecoration: 'none'
                   }}
                 >
                   {displayName}
@@ -76,38 +77,35 @@ const Breadcrumb = ({ location }) => {
 
 const Navbar = () => {
   const location = useLocation();
-  
+
   const isActive = (path) => {
     const currentPath = location.pathname;
-    
+
     if (path === '/home') {
       return currentPath === '/' || currentPath === '/home';
     }
-    
-    return currentPath.startsWith(path);
+
+    // Only highlight if the current path matches the nav item exactly or is a sub-route (but not for /home)
+    return currentPath.startsWith(path) && path !== '/home';
   };
 
-  // Navigation items with clearer labels and descriptions
+  // Navigation items
   const navItems = [
     {
       path: '/home',
-      label: 'Home',
-      description: 'Project overview and latest updates'
+      label: 'Home'
     },
     {
       path: '/key-outputs',
-      label: 'Research & Publications',
-      description: 'Scientific studies and technical reports'
+      label: 'Research & Publications'
     },
     {
       path: '/pathway-explorer',
-      label: 'Recycling Solutions',
-      description: 'Interactive tyre recycling pathways'
+      label: 'Recycling Solutions'
     },
     {
       path: '/data-visualisation',
-      label: 'Analysis Tools',
-      description: 'Compare and analyze recycling options'
+      label: 'Analysis Tools'
     }
   ];
 
@@ -134,53 +132,22 @@ const Navbar = () => {
 
           <div className={styles.navLinks}>
             {navItems.map((item) => (
-              <Link 
+              <Link
                 key={item.path}
-                to={item.path} 
+                to={item.path}
                 className={`${styles.navLink} ${isActive(item.path) ? styles.activeLink : ''}`}
                 aria-current={isActive(item.path) ? 'page' : undefined}
-                title={item.description}
                 style={{
                   position: 'relative'
                 }}
               >
                 {item.label}
-                {/* Tooltip on hover */}
-                <span style={{
-                  position: 'absolute',
-                  bottom: '-45px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  background: '#003C69',
-                  color: 'white',
-                  padding: '8px 12px',
-                  borderRadius: '6px',
-                  fontSize: '12px',
-                  whiteSpace: 'nowrap',
-                  opacity: 0,
-                  visibility: 'hidden',
-                  transition: 'opacity 0.2s, visibility 0.2s',
-                  zIndex: 1000,
-                  pointerEvents: 'none'
-                }}
-                className="nav-tooltip"
-                >
-                  {item.description}
-                </span>
               </Link>
             ))}
           </div>
         </div>
       </nav>
-      <Breadcrumb location={location} />
-      
-      {/* Add CSS for tooltip hover effect */}
-      <style jsx>{`
-        .${styles.navLink}:hover .nav-tooltip {
-          opacity: 1 !important;
-          visibility: visible !important;
-        }
-      `}</style>
+      <Breadcrumb />
     </>
   );
 };

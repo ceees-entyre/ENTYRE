@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Breadcrumb = ({ customItems = null }) => {
   const location = useLocation();
-  
+
   // Default breadcrumb mapping
   const breadcrumbNames = {
     'home': 'Home',
@@ -17,14 +17,14 @@ const Breadcrumb = ({ customItems = null }) => {
   };
 
   let breadcrumbItems = [];
-  
+
   if (customItems) {
     breadcrumbItems = customItems;
   } else {
     const pathnames = location.pathname.split('/').filter((x) => x);
-    
-    // Don't show breadcrumb on home page
-    if (pathnames.length === 0 || pathnames[0] === 'home') {
+
+    // Only show breadcrumb if there are at least two levels (e.g. /section/page)
+    if (pathnames.length < 2) {
       return null;
     }
 

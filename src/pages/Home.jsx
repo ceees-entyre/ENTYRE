@@ -73,6 +73,15 @@ const DynamicSection = ({ section }) => {
 
   // Render different section types
   switch (section.type) {
+    case 'banner-carousel':
+      return (
+        <section
+        style={{
+          marginBottom: '32px'
+        }}>
+          <BannerCarousel />
+        </section>
+      )
     case 'hero':
       return (
         <section
@@ -84,7 +93,7 @@ const DynamicSection = ({ section }) => {
             style={{
               ...titleStyles,
               fontSize:'2.8rem',
-              color: '#fff',
+              color: section.typography?.titleColor || '#fff',
               textAlign: 'center',
             }}
           >
@@ -114,7 +123,8 @@ const DynamicSection = ({ section }) => {
                 textAlign: 'center',
                 maxWidth: '70%',
                 marginLeft: 'auto',
-                marginRight: 'auto'
+                marginRight: 'auto',
+                color: section.typography?.contentColor || '#333'
               }}
             >
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{section.content}</ReactMarkdown>
@@ -695,9 +705,6 @@ export default function FlexibleHome() {
 
   return (
     <>
-      <div style={{ marginBottom: '40px',maxWidth: '95%', marginLeft: 'auto', marginRight: 'auto' }}>
-        <BannerCarousel />
-      </div>
       <div style={{ maxWidth: '95%', margin: '0 auto', padding: '0 20px' }}>
         {sections
         .filter(section => section.isVisible !== false)

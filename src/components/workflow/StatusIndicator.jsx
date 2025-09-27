@@ -56,7 +56,6 @@ const StatusIndicator = ({ status, showTooltip = true }) => {
     color: 'white',
     borderRadius: '6px',
     fontSize: '12px',
-    whiteSpace: 'nowrap',
     width: '200px',
     whiteSpace: 'normal',
     zIndex: 1000,
