@@ -1,5 +1,0 @@
-# Articles
-<!-- split -->
-
-# Videos
-<!-- split -->
